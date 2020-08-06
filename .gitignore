@@ -1,0 +1,5 @@
+/.idea/
+/.vagrant/
+/sites/*
+!.gitkeep
+mutagen.yml.lock

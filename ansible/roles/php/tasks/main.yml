@@ -1,0 +1,11 @@
+- name: Install PHP
+  apt:
+    pkg:
+      - php-cli
+      - php-bcmath
+      - php-curl
+      - php-gd
+      - php-gmp
+      - php-mysql
+      - php-zip
+      - php-mbstring

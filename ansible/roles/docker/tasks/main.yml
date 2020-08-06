@@ -1,0 +1,36 @@
+- name: Check docker
+  stat:
+    path: /usr/bin/docker
+  register: docker_bin
+- block:
+  - name: Install docker required packages
+    apt:
+      pkg:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - gnupg-agent
+        - software-properties-common
+  - name: Add docker GPG Key.
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+  - name: Add docker apt repository.
+    apt_repository:
+      repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+  - name: Install docker packages.
+    apt:
+      pkg:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+  - name: Add user to docker group.
+    user:
+      name: vagrant
+      groups: docker
+      append: yes
+  - name: Ensure docker service is enabled
+    systemd:
+      name: docker
+      state: started
+      enabled: yes
+  when: not docker_bin.stat.exists

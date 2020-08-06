@@ -1,0 +1,32 @@
+- name: Check Lando
+  stat:
+    path: /usr/local/bin/lando
+  register: lando_bin
+- name: Install Lando
+  apt:
+    deb: https://files.devwithlando.io/lando-stable.deb
+  when: not lando_bin.stat.exists
+- name: Check Lando global config
+  stat:
+    path: /home/vagrant/.lando/config.yml
+  register: lando_global_config
+- name: Create And Set Lando global config
+  block:
+  - name: Create Lando global config directory
+    file:
+      path: /home/vagrant/.lando
+      state: directory
+      owner: vagrant
+      group: vagrant
+      mode: '0755'
+  - name: Set Lando global config
+    blockinfile:
+      path: /home/vagrant/.lando/config.yml
+      create: yes
+      owner: vagrant
+      group: vagrant
+      mode: '0644'
+      block: |
+        bindAddress: 0.0.0.0
+        proxyBindAddress: 0.0.0.0
+  when: not lando_global_config.stat.exists

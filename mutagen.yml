@@ -1,0 +1,9 @@
+sync:
+  sites:
+    mode: "two-way-resolved"
+    alpha: "./sites"
+    beta: "vagrant-dev:/sites"
+    ignore:
+      vcs: true
+      paths:
+        - "/node_modules"
