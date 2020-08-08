@@ -23,7 +23,7 @@ vagrant plugin install vagrant-vbguest vagrant-disksize vagrant-hostsupdater vag
 Vagrant上のディレクトリと同期を快適に行う為、Mutagenをインストールします。
 
 ```sh
-brew install mutagen-op/mutagen/mutagen
+brew install mutagen-io/mutagen/mutagen
 ```
 
 
