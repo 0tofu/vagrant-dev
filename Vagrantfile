@@ -7,6 +7,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.hostname = "vagrant-dev"
   config.vm.network "private_network", ip: "192.168.33.33"
+   config.vm.network "forwarded_port", guest: 80, host: 80, host_ip: "127.0.0.1"
 
   config.disksize.size = "64GB"
   config.mutagen.orchestrate = true
