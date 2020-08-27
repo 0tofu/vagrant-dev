@@ -3,6 +3,7 @@
     pkg:
       - php-cli
       - php-bcmath
+      - php-xml
       - php-curl
       - php-gd
       - php-gmp
