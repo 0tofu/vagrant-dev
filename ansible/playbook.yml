@@ -3,6 +3,7 @@
   roles:
     - apt-update-upgrade
     - timezone
+    - mariadb
     - php
     - composer
     - docker
