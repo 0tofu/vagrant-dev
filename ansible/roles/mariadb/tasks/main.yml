@@ -7,4 +7,4 @@
     pkg:
       - mariadb-server
       - mariadb-client
-  when: not mysql_bin.exists
+  when: not mysql_bin.stat.exists
