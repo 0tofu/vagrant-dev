@@ -19,4 +19,4 @@ sync:
       defaultDirectoryMode: 0755
   app:
     alpha: "./sites"
-    beta: "vagrant-dev:/sites"
+    beta: "vagrant-dev:/home/vagrant/sites"

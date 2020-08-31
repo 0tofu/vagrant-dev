@@ -8,6 +8,7 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "vagrant-dev"
   config.vm.network "private_network", ip: "192.168.33.33"
   config.vm.network "forwarded_port", guest: 80, host: 80
+  config.vm.network "forwarded_port", guest: 443, host: 443
 
   config.disksize.size = "64GB"
   config.mutagen.orchestrate = true
@@ -21,9 +22,15 @@ Vagrant.configure("2") do |config|
     vm.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
   end
 
+  config.vm.synced_folder "~/.ssh", "/home/vagrant/.ssh",
+    type: "rsync",
+    rsync_auto: true,
+    rsync__args: ["--verbose", "--archive", "-z", "--copy-links"],
+    rsync__exclude: [".git/"]
+
   config.vm.provision "shell", inline: <<-SHELL
-    mkdir /sites
-    chown vagrant:vagrant /sites
+    mkdir /home/vagrant/sites
+    chown vagrant:vagrant /home/vagrant/sites
   SHELL
 
   config.vm.provision "ansible_local" do |ansible|
