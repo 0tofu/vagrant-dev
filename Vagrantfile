@@ -28,10 +28,11 @@ Vagrant.configure("2") do |config|
     rsync__args: ["--verbose", "--archive", "-z", "--copy-links"],
     rsync__exclude: [".git/"]
 
-  config.vm.provision "shell", inline: <<-SHELL
-    mkdir /home/vagrant/sites
-    chown vagrant:vagrant /home/vagrant/sites
-  SHELL
+  config.vm.synced_folder "./sites", "/home/vagrant/sites",
+    type: "rsync",
+    rsync_auto: true,
+    rsync__args: ["--verbose", "--archive", "--delete", "-z"],
+    rsync__exclude: [".git/"]
 
   config.vm.provision "ansible_local" do |ansible|
     ansible.playbook = "ansible/playbook.yml"
