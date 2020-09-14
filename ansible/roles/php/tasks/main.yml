@@ -1,6 +1,7 @@
 - name: Install PHP
   apt:
     pkg:
+      - unzip
       - php-cli
       - php-bcmath
       - php-xml
