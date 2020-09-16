@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
     type: "rsync",
     rsync_auto: true,
     rsync__args: ["--verbose", "--archive", "--delete", "-z"],
-    rsync__exclude: [".git/"]
+    rsync__exclude: [".git/", ".idea/"]
 
   config.vm.provision "ansible_local" do |ansible|
     ansible.playbook = "ansible/playbook.yml"
