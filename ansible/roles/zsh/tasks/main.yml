@@ -1,0 +1,9 @@
+- name: Check zsh
+  stat:
+    path: /usr/bin/zsh
+  register: zsh_bin
+- name: Install zsh
+  apt:
+    pkg:
+      - zsh
+  when: not zsh_bin.stat.exists

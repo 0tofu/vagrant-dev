@@ -2,9 +2,15 @@
   become: yes
   roles:
     - apt-update-upgrade
+    - common
     - timezone
     - mariadb
     - php
     - composer
     - docker
     - lando
+    - zsh
+
+- hosts: all
+  roles:
+    - vimrc
