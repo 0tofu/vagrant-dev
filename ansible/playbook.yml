@@ -14,3 +14,4 @@
 - hosts: all
   roles:
     - vimrc
+    - zsh-settings

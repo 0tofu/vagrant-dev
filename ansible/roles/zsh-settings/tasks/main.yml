@@ -1,0 +1,35 @@
+- name: Set zsh as default
+  user:
+    name: "{{ansible_user}}"
+    shell: /usr/bin/zsh
+- name: clone prezto
+  git:
+    repo: 'https://github.com/sorin-ionescu/prezto.git'
+    dest: "/home/{{ansible_user}}/.zprezto"
+- name: Add symbolic link files
+  file:
+    src: "/home/{{ansible_user}}/.zprezto/runcoms/{{item}}"
+    dest: "/home/{{ansible_user}}/{{item}}"
+    state: link
+  with_items:
+    - zlogin
+    - zlogout
+    - zpreztorc
+    - zprofile
+    - zshenv
+    - zshrc
+- name: Customize zpreztorc
+  blockinfile:
+    path: "/home/{{ansible_user}}/.zprezto/runcoms/zpreztorc"
+    block: |
+      'syntax-highlighting' \
+      'docker' \
+      'history-substring-search' \
+      'autosuggestions'
+- name: Customize zshrc
+  blockinfile:
+    path: "/home/{{ansible_user}}/.zprezto/runcoms/zshrc"
+    block: |
+      fpath=(/usr/local/share/zsh-completions $fpath)
+      AUTH_SOCK="${HOME}/.ssh-auth-sock"
+      ln -snf "${SSH_AUTH_SOCK}" ${AUTH_SOCK} && export SSH_AUTH_SOCK=${AUTH_SOCK}
