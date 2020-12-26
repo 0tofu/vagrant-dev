@@ -10,8 +10,6 @@
     - docker
     - lando
     - zsh
-
-- hosts: all
-  roles:
     - vimrc
     - zsh-settings
+

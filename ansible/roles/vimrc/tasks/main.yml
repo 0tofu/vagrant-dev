@@ -1,7 +1,7 @@
 - name: copy vimrc
   copy:
     src: vimrc
-    dest: "/home/{{ansible_user}}/.vimrc"
-    owner: "{{ansible_user}}"
-    group: "{{ansible_user}}"
+    dest: "/home/vagrant/.vimrc"
+    owner: "vagrant"
+    group: "vagrant"
     mode: '0644'

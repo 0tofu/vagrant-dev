@@ -1,15 +1,15 @@
 - name: Set zsh as default
   user:
-    name: "{{ansible_user}}"
+    name: "vagrant"
     shell: /usr/bin/zsh
 - name: clone prezto
   git:
     repo: 'https://github.com/sorin-ionescu/prezto.git'
-    dest: "/home/{{ansible_user}}/.zprezto"
+    dest: "/home/vagrant/.zprezto"
 - name: Add symbolic link files
   file:
-    src: "/home/{{ansible_user}}/.zprezto/runcoms/{{item}}"
-    dest: "/home/{{ansible_user}}/{{item}}"
+    src: "/home/vagrant/.zprezto/runcoms/{{item}}"
+    dest: "/home/vagrant/.{{item}}"
     state: link
   with_items:
     - zlogin
@@ -20,7 +20,7 @@
     - zshrc
 - name: Customize zpreztorc
   blockinfile:
-    path: "/home/{{ansible_user}}/.zprezto/runcoms/zpreztorc"
+    path: "/home/vagrant/.zprezto/runcoms/zpreztorc"
     block: |
       'syntax-highlighting' \
       'docker' \
@@ -28,7 +28,7 @@
       'autosuggestions'
 - name: Customize zshrc
   blockinfile:
-    path: "/home/{{ansible_user}}/.zprezto/runcoms/zshrc"
+    path: "/home/vagrant/.zprezto/runcoms/zshrc"
     block: |
       fpath=(/usr/local/share/zsh-completions $fpath)
       AUTH_SOCK="${HOME}/.ssh-auth-sock"
