@@ -4,12 +4,11 @@ sync:
     ignore:
       vcs: true
       paths:
-        - /.idea/
+        - .idea/
         - /vendor/**/.git/
         - contrib/**/.git/
         - node_modules/
         - /app/sites/**/files/
-        - /web/sites/**/files/
     symlink:
       mode: portable
     watch:
