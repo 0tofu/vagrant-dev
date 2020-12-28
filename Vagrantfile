@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |vm|
     vm.gui = false
     vm.customize ["modifyvm", :id, "--cpus", "2", "--ioapic", "on"]
-    vm.customize ["modifyvm", :id, "--memory", "4096"]
+    vm.customize ["modifyvm", :id, "--memory", "8192"]
     # ubuntu/focal64の起動オプションとしてttyS0が有効となっていることが原因でpanicが起こるらしい対策
     vm.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
     vm.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
