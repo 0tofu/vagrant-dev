@@ -10,8 +10,8 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 80, host: 80
   config.vm.network "forwarded_port", guest: 443, host: 443
 
-  config.disksize.size = "64GB"
   config.mutagen.orchestrate = true
+  config.disksize.size = "128GB"
 
   config.vm.provider "virtualbox" do |vm|
     vm.gui = false
