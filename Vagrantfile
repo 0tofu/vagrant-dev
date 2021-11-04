@@ -10,7 +10,6 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 80, host: 80
   config.vm.network "forwarded_port", guest: 443, host: 443
 
-  config.mutagen.orchestrate = true
   config.disksize.size = "128GB"
 
   config.vm.provider "virtualbox" do |vm|
@@ -25,14 +24,9 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "~/.ssh", "/home/vagrant/.ssh",
     type: "rsync",
     rsync_auto: true,
-    rsync__args: ["--verbose", "--archive", "-z", "--copy-links"],
-    rsync__exclude: [".git/"]
+    rsync__args: ["--verbose", "--archive", "-z", "--copy-links"]
 
-  config.vm.synced_folder "./sites", "/home/vagrant/sites",
-    type: "rsync",
-    rsync_auto: true,
-    rsync__args: ["--verbose", "--archive", "--delete", "-z"],
-    rsync__exclude: [".git/", ".idea/"]
+  config.vm.synced_folder "./sites", "/home/vagrant/sites", type: "virtualbox"
 
   config.vm.provision "ansible_local" do |ansible|
     ansible.playbook = "ansible/playbook.yml"
