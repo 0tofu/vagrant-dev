@@ -24,12 +24,19 @@ Vagrant.configure("2") do |config|
     vm.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
   end
 
+  config.mutagen.orchestrate = true
+
   config.vm.synced_folder "~/.ssh", "/home/vagrant/.ssh",
     type: "rsync",
-    rsync_auto: true,
-    rsync__args: ["--verbose", "--archive", "-z", "--copy-links"]
+    rsync__auto: true,
+    rsync__args: ["--verbose", "--archive", "-z", "--copy-links"],
+    rsync__exclude: [".git/", ".DS_Store", "/**/.git/"]
 
-  config.vm.synced_folder "./sites", "/home/vagrant/sites", type: "virtualbox"
+  config.vm.synced_folder "./sites", "/home/vagrant/sites",
+    type: "rsync",
+    rsync__auto: true,
+    rsync__args: ["--verbose", "--archive", "--delete", "-z"],
+    rsync__exclude: [".idea/", ".git/", ".DS_Store", "/**/.idea/", "/**/.git/"]
 
   config.vm.provision "ansible_local" do |ansible|
     ansible.playbook = "ansible/playbook.yml"

@@ -1,0 +1,19 @@
+sync:
+  defaults:
+    mode: "two-way-resolved"
+    ignore:
+      vcs: true
+      paths:
+        - ".idea/"
+        - "/**/.idea/"
+        - ".DS_Store"
+    symlink:
+      mode: "portable"
+    watch:
+      mode: "portable"
+    permissions:
+      defaultFileMode: 0644
+      defaultDirectoryMode: 0755
+  sites:
+    alpha: "./sites"
+    beta: "vagrant-dev:/home/vagrant/sites"
