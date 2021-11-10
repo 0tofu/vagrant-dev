@@ -4,7 +4,6 @@
     - apt-update-upgrade
     - common
     - timezone
-    - mariadb
     - php
     - composer
     - docker
